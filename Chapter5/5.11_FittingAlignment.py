@@ -3,10 +3,10 @@ Goal - Solve the Fitting Alignment Problem
 input - two nucleotide strings v and w, where v has length at most 1000 and w has length at most 100
 output - A highest-scoring fitting alignment between v and w. Use the simple scoring method in which 
          matches count +1 and both the mismatch and indel penalties are 1.
-
+./datasets/dataset_609147_5.txt
 '''
 def ReadFile():
-    with open('./datasets/dataset_609147_5.txt') as f:
+    with open('./testcases/08_FittingAlignment/inputs/sample.txt') as f:
         string1 = f.readline().strip()
         string2 = f.readline().strip()
 
@@ -63,11 +63,11 @@ def FittingAlignment(string1, string2):
     return max_score, align1, align2
 
 
-#string1 = 'GTAGGCTTAAGGTTA'
-#string2 = 'TAGATA'
-inputs = ReadFile()
-string1 = str(inputs[0])
-string2 = str(inputs[1])
+string1 = 'GTAGGCTTAAGGTTA'
+string2 = 'TAGATA'
+#inputs = ReadFile()
+#string1 = str(inputs[0])
+#string2 = str(inputs[1])
 max_score , align1, align2 = FittingAlignment(string1,string2)
 print(max_score)
 print(align1)
