@@ -57,3 +57,19 @@ Coding problems from bioinformatics text book
     > 3.8 k-Universal Circular String Problem (incomplete)
     
 - Chapter 5: How Do We Compare Biological Sequences? 
+
+    > 5.5 Dynamic Programing Change Problem
+
+    > 5.6 Longest Path Manhattan Tourist Problem 
+    
+    > 5.8 Using OutputLCS to Solve the Longest Substring Problem 
+
+    > 5.8 Longest Path in a DAG Problem
+
+    > 5.10 Global Alignment Problem
+
+    > 5.10 Local Alignment Problem
+
+    > 5.11 Edit Distance Problem 
+
+    > 5.11 Overlap Alignment (works for sample not not full dataset)
