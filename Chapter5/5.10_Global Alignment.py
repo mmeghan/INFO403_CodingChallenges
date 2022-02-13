@@ -16,10 +16,10 @@ def GlobalAlignment (str1, str2, blosum, matrix):
         m[0][i+1] = m[0][i] - 5
     for i in range(len(str2)):
         m[i+1][0] = m[i][0] - 5
+        
     for i in range(len(str2)):
         for j in range(len(str1)):
-            m[i+1][j+1] = max(m[i][j+1] - 5, m[i+1][j] - 5,
-                                      m[i][j] + blosum[matrix.index(str2[i])][matrix.index(str1[j])])
+            m[i+1][j+1] = max(m[i][j+1] - 5, m[i+1][j] - 5, m[i][j] + blosum[matrix.index(str2[i])][matrix.index(str1[j])])
     x = []
     y = []
     i = len(str2) - 1
