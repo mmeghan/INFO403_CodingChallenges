@@ -46,6 +46,7 @@ def medianString(file):
     k = inputs[1]
     distance = (k+1) * len(dna)
     median = ""
+	#for each k-mer Pattern from AA..AA to TT..TT
     for i in range(4**k):
         pattern = numberToPattern(i, k)
         z = distanceBetweenPatternAndString(pattern, dna)
@@ -55,4 +56,4 @@ def medianString(file):
     return median
 
 
-print(medianString('dataset_609080_9.txt'))
+print(medianString('./datasets/dataset_609080_9.txt'))
