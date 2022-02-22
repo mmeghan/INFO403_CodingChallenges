@@ -72,11 +72,11 @@ Coding problems from bioinformatics text book
 
     > 5.11 Edit Distance Problem 
 
-    > 5.11 Overlap Alignment (works for sample not not full dataset)
+    > 5.11 Overlap Alignment 
     
     > 5.12 Alignment with Affine Gap Penalties (incomplete)
 
-    > 5.13 Middle Edge in Linear Space Problem (protein problem) (incomplete)
+    > 5.13 Middle Edge in Linear Space Problem (protein problem) 
 
     > 5.13 Implement Linear Space Alignment to solve the Global Alignment Problem for a large datase (incomplete)
 
