@@ -4,133 +4,103 @@ input: two long protein strings written in the single-letter amino acid alphabet
 output: the maximum alignment score of these strings followed by an alignment achieving this maximum score
 
 use Blosum62 scoring matrix and indel penalty of 5 
+
+-During the execution of LinearSpaceAlignment two recursive calls are done, LinearSpaceAlignment(v, w, top=0, bottom=4, right=0, left=4) and LinearSpaceAlignment(v, w, 5, 8, 5, 8) 
+-In the case when midEdge is horizontal or diagonal the left blue rectangle is shifted by one column to the right 
+as compared to the middle column(the line middle = middle +1)
+- In the case when midEdge is vertical or diagonal, the left blue rectagle is shifted by one row to the bottom
+as compared to the postion of the middle node (the line midNode = midNode +1)
+
 '''
 
-#from ScoringMatrices import BLOSUM62
+from ScoringMatrices import BLOSUM62
+from MiddleEdge import MiddleEdge
 import math
-import numpy as np
 
 pentalty = 5
+blosum = BLOSUM62()
 
+def ReadFile():
+    with open ('./testcases/12_LinearSpaceAlignment/inputs/sample.txt', 'r') as f:
+        data = f.readlines()
+        str1 = data[0].strip()
+        str2 = data[1].strip()
+    return (str1, str2)
 
-with open ('./testcases/12_LinearSpaceAlignment/inputs/sample.txt', 'r') as f:
-    data = f.readlines()
-    str1 = data[0].strip()
-    str2 = data[1].strip()
-with open('BLOSUM62.txt', 'r') as input_data:
-    items = [line.strip().split() for line in input_data.readlines()]
-    blosum = {(item[0], item[1]):int(item[2]) for item in items}
-
-
-def twoColumnWeight(str1, str2, middle):
-    m = len(str1)
-    n = len(str2)
-
-    weightSum = np.zeros((m+1,2))
-    for i in range(m+1):
-        weightSum[i,0] = -pentalty*i
-    if middle == 0:
-        weightSum[0:m+1, 1] = weightSum[0:m+1,0]
-        return weightSum
-    count = 0 
-    while True:
-        weightSum[0,1] = weightSum[0,0]-pentalty
-        for i in range(1, m+1):
-            if (str1[i-1],str2[0]) in blosum:
-                weightSum[i,1] = max(weightSum[i,0]-pentalty, weightSum[i-1,1]-pentalty, weightSum[i-1,0] + blosum[str1[i-1],str2[0]])
-            else:
-                weightSum[i,1] = max(weightSum[i,0]-pentalty, weightSum[i-1,1]-pentalty, weightSum[i-1,0]+blosum[(str2[0],str2[i-1])])
-        str2 = str2[1:n]
-        count += 1
-        if count == middle:
-            break 
-        weightSum[0:m+1,0] = weightSum[0:m+1,1]
-    return weightSum
-
-
-
-def MiddleNodeEdge(top,bottom,left,right):
-    first = str1[top:bottom]
-    second = str2[left:right]
-    middle = math.floor((left+right)/2) - left
-    First = twoColumnWeight(first,second,middle)
-    fromStart = First[0:len(first)+1,1]
-    #to end
-    firstR = first[::-1]
-    secondR = second[::-1]
-    middler = len(second) - middle
-    FirstR  =twoColumnWeight(firstR,secondR,middler)
-    toEnd = np.flip(FirstR[0:len(first)+1,1])
-    length = fromStart + toEnd
-    index = np.argmax(length)
-    V = FirstR[len(first)-index-1,1] - pentalty
-    H = FirstR[len(first)-index, 0] - pentalty
-    if (firstR[len(first)-index-1], secondR[middler-1]) in blosum:
-        D = FirstR[len(first)-index-1,0] + blosum[(firstR[len(first)-index-1], secondR[middler-1])] 
-    else:
-        D = FirstR[len(first)-index-1,0] + blosum[(secondR[middler-1],firstR[len(first)-index-1])]
-    if FirstR[len(first) - index,1] == D:
-        return (index+top,'D')
-    elif FirstR[len(first)-index,1] == H:
-        return (index+top, 'H')
-    elif FirstR[len(first)-index,1] == V:
-        return (index+top, 'V')
-    
-
-def LinearSpaceAlignment ( top, bottom, left, right):
-        #the case left = right describes the alignment of an empty string agaist the string Str1top+1...Str1bottom
-        #which is trivially computed as the score of a gap formed by bottom - top vertical edges 
-    if left ==right:
-        return 'V'*(bottom-top)
-    if top == bottom:
-        return 'H'*(right-left)
-    middle = math.floor((left+right)/2)
-    middleNode = MiddleNodeEdge(top,bottom,left,right)[0]
-    middleEdge = MiddleNodeEdge(top,bottom,left,right)[1]
-    pathLeft = LinearSpaceAlignment(top,middleNode, left, middle)
-    if middleEdge == 'H' or middleEdge == 'D':
-        middle += 1
-    if middleEdge == 'V' or middleEdge == 'D':
-        middleNode += 1
-    pathRight = LinearSpaceAlignment(middleNode, bottom, middle, right)
-    
-    return pathLeft + middleEdge + pathRight 
-
-def getAlignment (path, string1, string2):
-    align1 = ''
-    align2= ''
-    score = 0 
-    for i in range(len(path)):
-        if path[i] =='V':
-            align1 = align1 + string1[0]
-            align2 = align2 + '-'
-            score = score -  pentalty
-            string1 = string1[1:]
-        elif path[i] == 'H':
-            align1 = align1 + '-'
-            align2 = align2 + string2[0]
-            score =  score - pentalty
-            align2 = align2[1:]
-        elif path[i] == 'D':
-            align1 = align1 + string1[0]
-            align2= align2 + string2[0]
-            if (string1[0] , string2[0]) in blosum:
-                score =score + blosum[(string1[0],string2[0])]
-            string1 = string1[1:]
-            string2 = string2[1:]
-    return score, align1, align2 
-
-#inputs = ReadFile()
-#str1= inputs[0]
-#str2 = inputs[1]
+inputs = ReadFile()
+str1= inputs[0]
+str2 = inputs[1]
 top = 0 
 bottom = len(str1)
 left = 0 
 right = len(str2)
+
+
+
+def MiddleNodeEdge(top, bottom, left, right):
+    #returns the coordinate i of the middle node (i,j)
+    #returns the direction (right, down, diagonal) depending on weather the middle edge is horizontal, diagonal or vertical
+    ((i1,j1),(i2,j2)) = MiddleEdge(str1[top:bottom], str2[left:right], blosum, pentalty)
+                #Right          #down           #diagonal
+    direction = 0 if i1==i1 else 1 if j1==j2 else 2
+    return j1, direction 
+
+def RecoverAlignment(path):
+    align1 = ''
+    align2 = ''
+    score = 0 
+    for i in range(len(path)):
+        if path[i] == 1:
+            align1 = align1 + str1[0]
+            align2 = align2 + '-'
+            score -= pentalty
+            str1= str1[1:]
+        elif path[i] == 0:
+            align1= align1 + '-'
+            align2 = align2 +str2[0]
+            score -= pentalty
+            str2 = str2[1:]
+        elif path[i] == 2:
+            align1 = align1+ str1[0]
+            align2 = align2 + str2[0]
+            if (str1[0],str2[0]) in blosum:
+                score += blosum[(str1[0], str2[0])]
+            else:
+                score += blosum[(str2[0], str1[0])]
+            str1 = str1[1:]
+            str2 = str2[1:]
+    return score, align1, align2
+
+
+
+def LinearSpaceAlignment(top, bottom, left, right):
+    if left == right:
+        return pentalty*(bottom-top)
+    if top ==  bottom:
+        return pentalty*(right-left)
+    
+    middle = math.floor((left+right)/2)
+    midNode, midEdge = MiddleNodeEdge(top,bottom, left, right)
+
+    pathLeft = LinearSpaceAlignment(top, midNode, left, middle)
+    #output midEdge
+    if midEdge == 0 or midEdge == 2:
+        middle += 1
+    if midEdge == 1 or midEdge == 2:
+        midNode +=1 
+    pathRight = LinearSpaceAlignment(midNode, bottom, middle, right)
+    
+    return pathLeft + midEdge + pathRight
+
+
+
+
+
 path = LinearSpaceAlignment(top,bottom,left,right)
-#gets the wrong score but right alignment 
-for result in getAlignment(path, str1,str2):
-    print (result)
+print('path:',path)
+for item in RecoverAlignment(path):
+    print(item)
+
 
 
 

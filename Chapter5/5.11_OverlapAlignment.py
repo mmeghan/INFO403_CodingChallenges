@@ -7,9 +7,10 @@ Output: The score of an optimal overlap alignment of v and w, followed by an
 - Matches +=1 
 - Mismatches/indels -=2 
 
+./testcases/09_OverlapAlignment/inputs/sample.txt
 '''
 
-from scipy.fftpack import sc_diff
+
 
 
 def ReadFile():
@@ -31,12 +32,12 @@ def OverlapAlignment(string1, string2):
 
 
     max_score = -3*(m*n)
+
    
     for i in range(1, m+1):
         for j in range(1, n+1):
                     #mismatchd down        #mismatch right                 #match diagnal 
-            score = [scoreMatrix[i-1][j]-2, scoreMatrix[i][j-1]-2,[-2,1][string1[i-1]==string2[j-1]] ]
-            #score = [scoreMatrix[i-1][j]-2, scoreMatrix[i][j-1] -2, scoreMatrix[i-1][j-1] + [-1,1][string1[i-1]==string2[j-1]]]
+            score = [scoreMatrix[i-1][j]-2, scoreMatrix[i][j-1]-2, [-2,1][string1[i-1]==string2[j-1]]+scoreMatrix[i-1][j-1] ]
             #find change that increases the similarity 
             scoreMatrix[i][j] = max(score)
             #get the loaction of that score and put in backtrack 
@@ -46,7 +47,6 @@ def OverlapAlignment(string1, string2):
                 if scoreMatrix[i][j] > max_score:
                     max_score = scoreMatrix[i][j]
                     max_indices = (i,j)
-             
     
     a, b = max_indices
     # Initialize the aligned strings as the input strings, removing the unused tails.
@@ -64,21 +64,19 @@ def OverlapAlignment(string1, string2):
         else:
             a = a-1
             b = b-1
-            
-    #remove the unused head and the aligned strings
-    align1 = align1[i:]
-    align2 = align2[j:]
 
+    #remove the unused head and the aligned strings
+    align1 = align1[a:]
+    align2 = align2[b:]
 
     return max_score, align1, align2
 
     
 
-#inputs = ReadFile()
-#string1 = str(inputs[0])
-#string2 = str(inputs[1])
-string1 = 'CCAT'
-string2 = 'AT'
+inputs = ReadFile()
+string1 = str(inputs[0])
+string2 = str(inputs[1])
+
 max_score , align1, align2 = OverlapAlignment(string1,string2)
 print(max_score)
 print(align1)

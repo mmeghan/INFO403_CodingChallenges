@@ -1,33 +1,9 @@
-'''
-Goal: Solve the Middle Edge in Linear Space Problem 
-input: two amino acid strings 
-output: the middle edge in the alignment grapn in the form "(i,j)(k,l)" where (i,j)
-        connects to (k,l).
-To compute score use BLOSUM62 scoring matrix and a linear indel pentaly of 5
-
-middle edge =  an edge in an potimal alignment path starting at the middle node 
-middle node = the node where the longest path crosses the middle column
-
-Classify a path from the source to the sink ad in i-path if it passes through the middle column at row i 
-
-./testcases/11_MiddleEdge/inputs/sample.txt
-'''
-from ScoringMatrices import BLOSUM62
 import math
-
-def ReadFile():
-    with open ('./datasets/dataset_609149_12.txt', 'r') as f:
-        data = f.readlines()
-        str1 = data[0].strip()
-        str2 = data[1].strip()
-
-    return (str1, str2)
 
 def MiddleEdge(str1, str2, blosum, indel_pentalty):
 
     m = len(str1)
     n = len(str2)
-    #indel_pentalty = 5
 
     s_start = [[0 for j in range(n+1)] for i in range(m+1)]
     s_end = [[0 for j in range(n+1)] for i in range(m+1)]
@@ -79,12 +55,3 @@ def MiddleEdge(str1, str2, blosum, indel_pentalty):
     connected = adj_row, adj_col
 
     return middleNode, connected
-
-inputs = ReadFile()
-str1 = inputs[0]
-str2 = inputs[1]
-
-blosum = BLOSUM62()
-indel_pentalty = 5
-
-print(MiddleEdge(str1, str2, blosum, indel_pentalty))
