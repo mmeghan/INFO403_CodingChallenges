@@ -81,7 +81,7 @@ def FindEulerianPath(adj_list, vertices, indegree, outdegree):
     return circuit
 
 def StringReconstruction():
-    fileinputs = ReadFile('./StringReconstruction/inputs/sample.txt')
+    fileinputs = ReadFile('./testcases/StringReconstruction/inputs/sample.txt')
     k= fileinputs[0]
     print('k: ',  k)
     patterns = fileinputs[1]

@@ -28,6 +28,8 @@ def FindEulerianPath(adj_list, verticies):
             outdegree[vertex] = len(adj_list[vertex])
             for edge in adj_list[vertex]:
                 indegree[edge] += 1
+    print('indegree',indegree)
+    print('outdegree', outdegree)
     #determin start and end point 
     start = -1
     end = -1
@@ -58,7 +60,7 @@ def FindEulerianPath(adj_list, verticies):
 
 
 
-with open('dataset_609101_6.txt', 'r') as f:
+with open('./datasets/dataset_609101_6.txt', 'r') as f:
     for line in f:
         nodes = line[:-1].split(' -> ')
         u = int(nodes[0])

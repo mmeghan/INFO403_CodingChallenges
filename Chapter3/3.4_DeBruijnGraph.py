@@ -31,7 +31,6 @@ def DeBruijnGraph(file):
 
 r = DeBruijnGraph('dataset_609097_6.txt')
 with open ('deBruijnSolution.txt' , 'w') as s:
-
     for key in sorted(r.keys()):
         s.write(key + '->' + r[key]+ '\n')
 
