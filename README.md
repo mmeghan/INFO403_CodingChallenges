@@ -56,9 +56,11 @@ Coding problems from bioinformatics text book
 
     * <span style="color:red">3.8 k-Universal Circular String Problem (incomplete) </span>
 
+    * <span style="color:red"> 3.9 String Reconstruction from Read Pairs </span>
+
 - **Chapter 4: How do we Sequence Antibodies?** 
 
-    * 
+    * 4.2 Protein Translation Problem 
     
 - **Chapter 5: How Do We Compare Biological Sequences?** 
 
@@ -78,7 +80,7 @@ Coding problems from bioinformatics text book
 
     * 5.11 Overlap Alignment 
     
-    * <span style="color:red">5.12 Alignment with Affine Gap Penalties (incomplete) </span>
+    * 5.12 Alignment with Affine Gap Penalties 
 
     * 5.13 Middle Edge in Linear Space Problem (protein problem) 
 
