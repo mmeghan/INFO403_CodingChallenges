@@ -32,8 +32,10 @@ str1= inputs[0]
 str2 = inputs[1]
 top = 0 
 bottom = len(str1)
+print('bottom:', bottom)
 left = 0 
 right = len(str2)
+print('right:', right)
 
 
 
@@ -42,6 +44,7 @@ def MiddleNodeEdge(top, bottom, left, right):
     #returns the direction (right, down, diagonal) depending on weather the middle edge is horizontal, diagonal or vertical
     ((i1,j1),(i2,j2)) = MiddleEdge(str1[top:bottom], str2[left:right], blosum, pentalty)
                 #Right          #down           #diagonal
+    print(((i1,j1),(i2,j2)))
     direction = 0 if i1==i1 else 1 if j1==j2 else 2
     return j1, direction 
 
@@ -89,7 +92,7 @@ def LinearSpaceAlignment(top, bottom, left, right):
     if midEdge == 1 or midEdge == 2:
         midNode +=1 
     pathRight = LinearSpaceAlignment(midNode, bottom, middle, right)
-    
+    print(pathLeft + midEdge + pathRight)
     return pathLeft + midEdge + pathRight
 
 
