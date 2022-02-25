@@ -11,6 +11,7 @@ Output: A string Text with k-mer composition equal to Patterns
 ***THIS IS MY CURRENT WORKING VERSION***
 '''
 from copy import deepcopy
+import random
 
 import sys
 sys.setrecursionlimit(10**6)
@@ -58,21 +59,70 @@ def deBrujin(k,patterns):
     for pattern in patterns:
         for i in range(len(pattern)-k+1):
             if pattern[i:(i+k-1)] not in graph.keys():
-                graph[pattern[i:(i+k-1)]] =  pattern[i+1:i+k]
+                graph[pattern[i:(i+k-1)]] = []
+                graph[pattern[i:(i+k-1)]].append(pattern[i+1:i+k])
             else:
-                graph[pattern[i:i+k-1]] += ',' + pattern[i+1:i+k] 
+                graph[pattern[i:i+k-1]].append(pattern[i+1:i+k])
     return graph 
+
+def EulerianPath(adj_list):
+    circut_max = len(adj_list.values())
+    start_node, end_node = FindStart(adj_list)  
+    if end_node not in adj_list.keys():
+        adj_list.setdefault(end_node, [])
+    adj_list[end_node].append(start_node)
+
+    red_adj_list= {}
+    red_adj_list = deepcopy(adj_list)
+
+    start = start_node
+    print('Start Node:', start)
+    curr = start
+
+    stack = []
+    circut = []
+    while len(circut) != circut_max+1:
+        if red_adj_list[curr] != []:
+            stack.append(curr)
+            step = random.choice(red_adj_list[curr])
+            red_adj_list[curr].remove(step)
+            curr = step
+        else:
+            circut.append(curr)
+            curr = stack[len(stack)-1]
+            stack.pop()
+    circut.pop(0)
+
+    path = start + '->'
+    for vertex in circut[::-1]:
+        path += (vertex + '->')
+    return path.strip('->')
+
+def GenomeConstruction(path):
+    n = len(path)
+    print('n:', n)
+    genome = str(path[0])
+    for element in path[1:]:
+        nucleotide= element[0]
+        genome += nucleotide
+    last_elem = path[n-1]
+    genome += last_elem[1]
+    return genome 
 
 def StringReconstruction():
     inputs = ReadFile()
     k = inputs[0]
     patterns = inputs[1]
-    dB = deBrujin(k, patterns)
-    print(dB)
+    print('patterns:',patterns)
+    deBruijn = deBrujin(k, patterns)
+    print('dbBruijn:',deBruijn)
+    path = EulerianPath(deBruijn)
+    print(path)
+    kmers = path.split('->')
+    genome = GenomeConstruction(kmers)
+    print(genome)
 
-def EulerianPath(adj_list):
-    circut_max = len(adj_list.values())
-    start_node, end_node = FindStart(adj_list)   
+
 
 
 StringReconstruction()
