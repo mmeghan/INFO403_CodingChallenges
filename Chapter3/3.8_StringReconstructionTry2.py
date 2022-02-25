@@ -5,7 +5,9 @@ Inputs: an integer k folloeed vy a list of k-mers Patterns
 Output: A string Text with k-mer composition equal to Patterns 
         if multiple answers exist can return anyone 
 
-./datasets/dataset_609101_7.txt
+
+
+./testcases/StringReconstruction/inputs/test3.txt
 
 
 ***THIS IS MY CURRENT WORKING VERSION***
@@ -17,7 +19,7 @@ import sys
 sys.setrecursionlimit(10**6)
 
 def ReadFile():
-    with open('./testcases/StringReconstruction/inputs/sample.txt', 'r')as f:
+    with open('./datasets/dataset_609101_7.txt', 'r')as f:
         k = int(f.readline().strip())
         patterns = [line.strip() for line in f.readlines()]
     return (k, patterns)
@@ -54,15 +56,14 @@ def FindStart(adj_list):
     return start_node, end_node
 
 
-def deBrujin(k,patterns):
+def deBrujin(patterns):
     graph = {}
     for pattern in patterns:
-        for i in range(len(pattern)-k+1):
-            if pattern[i:(i+k-1)] not in graph.keys():
-                graph[pattern[i:(i+k-1)]] = []
-                graph[pattern[i:(i+k-1)]].append(pattern[i+1:i+k])
-            else:
-                graph[pattern[i:i+k-1]].append(pattern[i+1:i+k])
+        if pattern[:-1] not in graph:
+            graph[pattern[:-1]] = []
+            graph[pattern[:-1]].append(pattern[1:])
+        else:
+            graph[pattern[:-1]].append(pattern[1:])
     return graph 
 
 def EulerianPath(adj_list):
@@ -99,26 +100,20 @@ def EulerianPath(adj_list):
     return path.strip('->')
 
 def GenomeConstruction(path):
-    n = len(path)
-    print('n:', n)
-    genome = str(path[0])
+    genome = path[0]
     for element in path[1:]:
-        nucleotide= element[0]
-        genome += nucleotide
-    last_elem = path[n-1]
-    genome += last_elem[1]
-    return genome 
+        genome += element[-1]
+    return genome
 
 def StringReconstruction():
     inputs = ReadFile()
     k = inputs[0]
     patterns = inputs[1]
-    print('patterns:',patterns)
-    deBruijn = deBrujin(k, patterns)
-    print('dbBruijn:',deBruijn)
+    deBruijn = deBrujin(patterns)
+    print('deBruijn', deBruijn)
     path = EulerianPath(deBruijn)
-    print(path)
     kmers = path.split('->')
+    print('kmers:',kmers)
     genome = GenomeConstruction(kmers)
     print(genome)
 
