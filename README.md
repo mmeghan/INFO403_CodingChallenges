@@ -52,7 +52,7 @@ Coding problems from bioinformatics text book
 
     * 3.8 Eulerian Path Problem 
 
-    * <span style="color:red">3.8 String Recosntruction using De Bruijn and and Eulerian Path (incomplete) </span>
+    * 3.8 String Recosntruction using De Bruijn and and Eulerian Path (incomplete)
 
     * <span style="color:red">3.8 k-Universal Circular String Problem (incomplete) </span>
 
