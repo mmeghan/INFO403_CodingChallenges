@@ -60,7 +60,13 @@ Coding problems from bioinformatics text book
 
 - **Chapter 4: How do we Sequence Antibodies?** 
 
-    * 4.2 Protein Translation Problem 
+    * 4.2 Protein Translation
+
+    * 4.2 Peptide Encoding
+
+    * 4.4 Generating Theoretical Spectrum
+
+    * 4.5 Counting Peptides with Given Mass
     
 - **Chapter 5: How Do We Compare Biological Sequences?** 
 
@@ -87,3 +93,15 @@ Coding problems from bioinformatics text book
     * <span style="color:red"> 5.13 Implement Linear Space Alignment to solve the Global Alignment Problem for a large datase (incomplete) </span>
 
     * 5.14 Multiple Longest Common Subsequence Problem 
+
+- **Chapter 6: Are There Fragile Regions in the Human Genome**
+
+    * 6.4 Greedy Algorithm for Sorting by Reversals 
+
+    * 6.4 Number of Breakpoints 
+
+    * 6.9 2-Break Distance 
+
+    * <span style="color:red">6.9 2-Break Sorting (incomplete) </span>
+
+    * <span style="color:red"> 6.11 Shared K-mers (incomplete) </span>
