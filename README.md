@@ -105,3 +105,13 @@ Coding problems from bioinformatics text book
     * <span style="color:red">6.9 2-Break Sorting (incomplete) </span>
 
     * <span style="color:red"> 6.11 Shared K-mers (incomplete) </span>
+
+- **Chapter 7: Which Animal Gave Us SARS**
+
+    * 7.2 Distance Between Leaves 
+
+    * 7.3 Limb Length 
+
+    * 7.4 Unweighted Pair Group Method with Arithmetic Mean (UPGMA) Implementation
+
+    * <span style="color:red"> 7.7 Neighbor-Joining Implementation (incomplete) </span>
