@@ -115,3 +115,13 @@ Coding problems from bioinformatics text book
     * 7.4 Unweighted Pair Group Method with Arithmetic Mean (UPGMA) Implementation
 
     * <span style="color:red"> 7.7 Neighbor-Joining Implementation (incomplete) </span>
+
+- **Chapter 8:How did Yeast Become a Wine Maker**
+
+    * 8.6 Frathest First Traversal 
+
+    * 8.7 Square Error Distortion
+
+    * 8.8 Llyod Algorithm for k-means clustering
+
+    
