@@ -114,6 +114,8 @@ Coding problems from bioinformatics text book
 
     * 7.4 Unweighted Pair Group Method with Arithmetic Mean (UPGMA) Implementation
 
+    * <span style="color:red"> 7.6 UPGMA Implementation (incomplete) </span> 
+
     * <span style="color:red"> 7.7 Neighbor-Joining Implementation (incomplete) </span>
 
 - **Chapter 8:How did Yeast Become a Wine Maker**
@@ -124,4 +126,20 @@ Coding problems from bioinformatics text book
 
     * 8.8 Llyod Algorithm for k-means clustering
 
-    
+    * <span style="color:red"> 8.14 Hierarchial Clustering (incomplete) </span>
+
+- **Chapter 9: How Do We Locate Disease-Causing Mutations**
+
+    * 9.3 Trie Construction 
+
+    * <span style="color:red">9.3 Trie Matching (incomplete)</span>
+
+    * 9.5 Suffix Tree Construction 
+
+    * <span style="color:red">9.5 Longest Repeat (incomplete) </span>
+
+    * 9.5 Longest Shared Substring 
+
+    * 9.6 Suffix Array 
+
+    * <span style="color:red">9.7 Burrows-Wheeler Transformation (incomplete)</span>
