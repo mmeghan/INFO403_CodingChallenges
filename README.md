@@ -143,3 +143,22 @@ Coding problems from bioinformatics text book
     * 9.6 Suffix Array 
 
     * <span style="color:red">9.7 Burrows-Wheeler Transformation (incomplete)</span>
+
+    * 9.9 Inverse Burrows-Wheeler Transform 
+
+    * 9.10 Burrows-Wheeler Matching
+
+    * 9.11 Better Burrows-Wheeler Matching 
+
+    * 9.13 Multiple Pattern Matching
+
+    * <span style="color:red">9.14 (incomplete )</span>
+
+- **Chapter 10: Why Have Biologist Not Developed an HIV Vaccine?**
+
+    * 10.5 Probability of a Hidden Path 
+
+    * 10.5 Probability of an Outcome Given a Hidden Path Probability 
+
+    * 10.6 Viterbi Decoding Problem
+        
